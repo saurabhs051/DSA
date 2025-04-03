@@ -28,11 +28,11 @@ class Solution {
   public:
     // Function to detect cycle in a directed graph.
     bool isCyclic(vector<vector<int>> &adj) {
-        int A = adj.size();
-        vector<bool> visited(A, false);
-        vector<bool> recStack(A, false);
+        int V = adj.size();
+        vector<bool> visited(V, false);
+        vector<bool> recStack(V, false);
 	// Check from each source node
-        for (int i = 0; i < A; ++i)
+        for (int i = 0; i < V; ++i)
         {
             if (getCycle(adj, i, visited, recStack))
                 return true;	// Early return
