@@ -24,8 +24,10 @@ class Solution {
   public:
     // Traverse UNDIRECTED / DIRECTED graph
     vector<int> dfs(vector<vector<int>>& adj) {
-        vector<int> result;
         int V = adj.size();
+		if (!V)
+			return {};
+		vector<int> result;
         vector<bool> visited(V, false);
 		// Traverse from each source node
         for (int src = 0; src < V; ++src)
