@@ -2,5 +2,7 @@
 ## Repository hosting DSA conceptual questions
 ---
 ### Notes
-1. Graph and Backtracking are kinda same genre.
+1. Graph
+  1. Backtracking : DFS of graph
+  2. Minimum path / time / distance asked : Use BFS
 ---
