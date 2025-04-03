@@ -2,7 +2,7 @@ class Solution {
     /* 
     *	1. Node should not be in current path (i.e. in current Recursion Stack)
     *	2. Try from each source node, to tackle case of disjoint graph
-	*	3. No need to visit already visited node (hence, maintain a visited vector, separate from recusion stack)
+    *	3. No need to visit already visited node (hence, maintain a visited vector, separate from recusion stack)
     */
     int getCycle(vector<vector<int>>& adj, int src, vector<bool> &visited, vector<bool> &recStack)
     {
