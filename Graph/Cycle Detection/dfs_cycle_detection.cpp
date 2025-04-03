@@ -30,7 +30,7 @@ class Solution {
         int A = adj.size();
         vector<bool> visited(A, false);
         vector<bool> recStack(A, false);
-	// Check from each source node
+		// Check from each source node
         for (int i = 0; i < A; ++i)
         {
             if (getCycle(adj, i, visited, recStack))
