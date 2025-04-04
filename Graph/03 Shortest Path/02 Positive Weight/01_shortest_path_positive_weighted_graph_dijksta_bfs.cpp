@@ -4,9 +4,9 @@ class Solution {
 	* Pattern :
 	*	1.  Minimum step asked : Hence BFS
  	*	2.  Weighted graph (positive weights) : Dijksta BFS (using Min Heap)
-	* 	2. 	Details
+	* 	3. 	Details
 	*		3.1	Parent vector for shortest path tracking
- 	*		3.2 No need for visited vector to prevent cycle, distance vector won't allow it. Won't revisit a node until we get a smaller distance for it.
+ 	*		3.2     No need for visited vector to prevent cycle, distance vector won't allow it. Won't revisit a node until we get a smaller distance for it.
 	*/
     struct NodeData
     {
