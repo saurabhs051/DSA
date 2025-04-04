@@ -8,11 +8,18 @@ class Solution {
 	*		3.1	Parent vector for shortest path tracking
  	*		3.2 No need for visited vector to prevent cycle, distance vector won't allow it. Won't revisit a node until we get a smaller distance for it.
 	*/
-
     struct NodeData
     {
         int node;
         int distance;
+    };
+    
+    // Comparator for min heap
+    struct Comparator{
+        bool operator()(const NodeData& a, const NodeData& b)
+        {
+            return a.distance > b.distance; // Min heap - we write reverse condition
+        }
     };
   public:
     vector<int> shortestPath(int n, int m, vector<vector<int>>& edges) {
@@ -27,23 +34,23 @@ class Solution {
         }
         
         // Shortest path (weighted graph) : BFS (Dijkstra i.e. minHeap)
-        vector<int> distance(n + 1, INT_MAX); 				//1-based indexing
-        priority_queue<int, vector<int>, greater<int>> q;   // min-heap
-        distance[1] = 0;    								// source node
-        q.push(1);          
+        vector<int> distance(n + 1, INT_MAX); //1-based indexing
+        priority_queue<NodeData, vector<NodeData>, Comparator> q;   // min-heap
+        distance[1] = 0;    // source node
+        q.push({1, 0});     // Have to push both, because min heap will use distance for sorting
         
         vector<int> parent(n + 1, -1);  // For shortest path tracking
         while (q.size())
         {
-            int curNode = q.top();
+            auto curNode = q.top();
             q.pop();
-            for (auto& neighbour : adj[curNode])
+            for (auto& neighbour : adj[curNode.node])
             {
-                if (distance[neighbour.node] > distance[curNode] + neighbour.distance)
+                if (distance[neighbour.node] > distance[curNode.node] + neighbour.distance)
                 {
-                    distance[neighbour.node] = distance[curNode] + neighbour.distance;
-                    q.push(neighbour.node);
-                    parent[neighbour.node] = curNode;
+                    distance[neighbour.node] = distance[curNode.node] + neighbour.distance;
+                    q.push({neighbour.node, distance[neighbour.node]});
+                    parent[neighbour.node] = curNode.node;
                 }
             }
         }
@@ -51,8 +58,6 @@ class Solution {
         vector<int> result;
         if (distance[n] == INT_MAX) // unreachable
             return {-1};
-
-		// we need to get vector = {size of shortest path, path from node 1 to n}
         int node = n;
         while (node != -1)
         {
