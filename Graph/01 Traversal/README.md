@@ -14,8 +14,8 @@
 ### 1.2 Breadth-First Search (BFS)
 - **Uses a queue with a visited vector**  
 - **Steps:**
-  1. **Result Management**:
-     - Add to the result when popping from the queue.
+  1. **Result Vector**:
+     - Process / Add to the result when popping from the queue.
   2. **Visited Vector**:
      - Update when inserting a node into the queue.
      - Ensure the node is not visited before traversing its neighbors.
