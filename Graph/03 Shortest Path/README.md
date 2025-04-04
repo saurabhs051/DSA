@@ -1,11 +1,20 @@
-## 🔍 BFS Intuition
+### BFS Intuition
+1. Minimum/shortest asked
+    - Shortest path
+    - Minimum distance
+    - Minimum time
+2. Spreading behaviour seen
+    - Flood fill
+    - Spreading infection
+3. Not Backtracking
+    - Rat ALL PATHS in maze
+    - Rat VALID PATHS in maze, etc.
 ---
+### BFS for Shortest path Variations
+1. Unweighted (Unit weight) graphs / grids     : Standard BFS (normal or multi-source or Level order BFS)
+2. Weighted graphs (Positive weight)           : Dijksta BFS (BFS with Min Heap)
+3. Weighted graphs (Negative weights)          : Bellmon Ford
 
-### 🛣️ Minimum Time / Distance / Shortest Path is asked :
-- or, we're interested in all neighbouring nodes first / spreading behavior (most of the grid / matrix questions)
-
-**Use:** **Breadth-First Search (BFS)**  
-**Why:** BFS explores nodes in the order of their distance from the source, ensuring the shortest path in **unweighted** graphs or grids.
 
 **💡 Example Problems:**
 - Flood fill
@@ -92,7 +101,10 @@ while (!q.empty()) {
 
 | Problem Type                                                  | Recommended BFS Variant     |
 |---------------------------------------------------------------|-----------------------------|
-| Shortest path / Minimum steps /  Time/steps tracked per level | Level-Order BFS             |
+| Just traverse / fill / spread                                 | Standard BFS                |
+| Shortest path / Minimum steps / Time/steps tracked per level  | Level-Order BFS             |
 | Simultaneous spread from multiple sources                     | Multi-Source BFS            |
+| Shortest path - Weighted Graph                                | Dijkstra BFS (Min Heap      |
+| Shortst path - Negative Weights                               | Bellmon Ford                |
 
 ---
