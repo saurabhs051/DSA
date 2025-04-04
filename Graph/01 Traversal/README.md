@@ -2,7 +2,7 @@
 
 ## 1. Traversal Methods
 
-### 1.1 Depth-First Search (DFS)
+### 1.1 Depth-First Search (DFS) - Traversal / Cycle detection
 - **Uses recursion with a visited vector**  
 - **Steps:**
   1. **Base case**: If the node is already visited, return.
@@ -11,7 +11,7 @@
      - Add to the result.
      - Recursively visit its neighbors.
 
-### 1.2 Breadth-First Search (BFS)
+### 1.2 Breadth-First Search (BFS) - Shortest path / spreading behaviour / Topological Sort
 - **Uses a queue with a visited vector**  
 - **Steps:**
   1. **Result Vector**:
