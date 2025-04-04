@@ -2,7 +2,7 @@ class Solution {
 	/*
 	* Shortest Path from Node 1 to Node n
 	* Pattern :
-	*	1.	Minimum step asked : Hence BFS
+	*	1.  Minimum step asked : Hence BFS
  	*	2.  Weighted graph (positive weights) : Dijksta BFS (using Min Heap)
 	* 	2. 	Details
 	*		3.1	Parent vector for shortest path tracking
