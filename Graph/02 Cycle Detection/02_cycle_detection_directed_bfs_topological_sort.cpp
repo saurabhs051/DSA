@@ -4,6 +4,8 @@ class Solution {
     *	1. Topological Sort (Kahn's algo) : Cycle if couldn't visit all nodes  
     *	2. Tracking visited nodes won't do as a visited node can be encountered again even without cycle
     *	3. Visited vector is only for tracking visited nodes. For preventing infinite loop in traversal, indegree == 0 check is enough.
+    * 	4. Notes :
+    *		4.1 If edges are gives rather than adjacency list, don't do `if(!edges.size()) return;` as there can we vertices without edges.
     */
   public:
     // Function to detect cycle in a directed graph.
