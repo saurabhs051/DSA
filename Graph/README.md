@@ -17,8 +17,8 @@
     2. Union-Find : visit(Union-Find) all edges, connected components end up in same set
 ---
 3. **Shortest Path**
-    1. Unweighted Graph (Unit weight) : BFS (Standard, Multi-source, Level order)
-    2. Weighted Graph (Positive weight) : Dijkstra BFS (BFS with Min Heap)
+    1. Unweighted Graph (Unit weight) : BFS (Standard, Multi-source, Level order) - O(V+E)
+    2. Weighted Graph (Positive weight) : Dijkstra BFS (BFS with Min Heap) - O((V+E)logV)
     3. Weighted Graph (Negative weight) : Bellmon Ford
 ---
 4. **Minimum Spanning Tree** (V-1 connecting edges comprising minimum weight)
