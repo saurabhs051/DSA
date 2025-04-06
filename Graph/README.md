@@ -29,3 +29,7 @@
     1. Krushkal's (Sort edges by weight and take V-1 minimum ones, as long as they are not making cycle(Union find - src, dest not having same parent))
     2. Prim's - Greedy
 ---
+7. **Strongly Connected Components** (for directed graphs)
+    1. Kosaraju's
+    2. Tarjan's
+---
