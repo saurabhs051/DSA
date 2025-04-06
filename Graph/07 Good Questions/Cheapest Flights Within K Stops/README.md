@@ -31,7 +31,7 @@ public:
                 int node = q.front(); q.pop();
                 for (auto& next : adj[node]) {
                     if (price[next.first] > price[node] + next.second) {
-                        price[next.first] = price[node] + next.second;
+                        price[next.first] = price[node] + next.second; // DON'T DO THIS. Don't use PRiCE OF SOURCE NODE (price[node]) from global min price array. Similar problem seen with Dijkstra (because of Min Heap)
                         q.push(next.first);
                     }
                 }
@@ -77,7 +77,7 @@ public:
                     if (next.first == dst)
                         minPath = min(minPath, node.second + next.second);
                     else
-                        q.push({next.first, node.second + next.second});
+                        q.push({next.first, node.second + next.second});  // No check - INFINITE LOOP
                 }
             }
             --k;
@@ -119,7 +119,7 @@ public:
                 auto node = q.front(); q.pop();
 
                 if (node.first == dst) {
-                    minPath = min(minPath, node.second);
+                    minPath = min(minPath, node.second);   // WON'T REACH HERE, stops get exhausted in last iteration, should've noted this down while traversing neighbours in last iteration
                     continue;
                 }
 
@@ -167,15 +167,14 @@ public:
 
         while (!q.empty()) {
             int size = q.size();
-            vector<int> tempPrice = price; // 🔑 Track prices for this level only
 
             while (size--) {
-                auto [node, cost] = q.front(); q.pop();
+                auto [node, lastCost] = q.front(); q.pop();
 
-                for (auto& [neigh, fare] : adj[node]) {
-                    if (cost + fare < tempPrice[neigh]) {
-                        tempPrice[neigh] = cost + fare;
-                        q.push({neigh, cost + fare});
+                for (auto& [next, nextFare] : adj[node]) {
+                    if (price[next] > lastCost + nextFare) {    // ONLY USE PRICE for price[next] for condition checking, NOT WITH price[node]
+                        price[next] = lastCost + nextFare;
+                        q.push({neigh, price[next]});
                     }
                 }
             }
@@ -192,7 +191,7 @@ public:
 
 ✅ **Why it works:**
 
-- Maintains a **temporary cost array per level** to avoid polluting global state.
+- Maintains a **temporary cost per level** to avoid polluting global state.
 - Only pushes neighbors if the **new path is cheaper** than any seen before.
 - Stops exactly after `k+1` layers (k stops = k+1 nodes visited).
 
@@ -201,9 +200,7 @@ public:
 ## 📌 Notes
 
 - 🧠 Think of this as a **level-based BFS**, where each level means 1 additional stop.
-- ✅ Updating `price[]` only after the level finishes ensures proper path independence.
 - ❗️Avoid reusing global cost updates across BFS levels — this is the **most common mistake**.
+- ✅ Not using `price[]` for newCost calculation ensures proper level independence. `price[]` is just used to ensure only the cheaper value that seen before gets added to queue
 
 ---
-
-Let me know if you'd like visual flow diagrams or complexity breakdowns!
