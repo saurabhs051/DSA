@@ -1,0 +1,220 @@
+############################################# CANT DO THIS - 0 #############################################
+
+class Solution {
+public:
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+        // Chapest price : BFS
+        // Positive weights with k stops : Not Dijkstra (Min Heap), since k stops mentioned (Global Distance gets wronly updated due to min heap - just remember!!)
+        // Standard BFS(Normal queue) with Level Order (since minimum 'price' asked - level by level)
+
+        if (src == dst)
+            return 0;
+        unordered_map<int, vector<pair<int, int>>> adj;
+        for (auto& flight : flights)
+            adj[flight[0]].push_back({flight[1], flight[2]});
+        vector<int> price(n, INT_MAX);
+        price[src] = 0;
+        queue<int> q;
+        q.push(src);
+        while (q.size())
+        {
+            int size = q.size();
+            while (size--)
+            {
+                int node = q.front();
+                q.pop();
+                for (auto& next : adj[node])
+                {
+////////////////////// Because : Can't use global array in k stop question, s it will run into race condition, will proceed with some wrong minimum value updated by someone
+/////////////////////////////////// similar problem seen with Dijkstra algorithm (BFS + Min Heap + global min array)
+
+                    if (price[next.first] > price[node] + next.second)  // price[node] - THIS IS THE CULPRIT. Don't take GLOBAL MIN price of SOURCE NODE. Use its price at time of insetion in QUEUE.
+                    {
+                        price[next.first] = price[node] + next.second;
+                        q.push(next.first);
+                    }
+
+/////////////////////////////////// Solution : Every node should insert its price at THAT point/level in queue (doon't use global minimum price)
+                }
+            }
+            --k;
+            if (k < 0)
+                break;
+        }
+        if (price[dst] == INT_MAX)
+            return -1;
+        return price[dst];
+    }
+};
+
+#############################################
+
+
+
+############################################# CANT DO THIS - 1 #############################################
+
+class Solution {
+public:
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+        // Cheapest price : BFS
+        // Positive weights with k stops : Not Dijkstra (Min Heap), since k stops mentioned (Global Distance gets wronly updated due to min heap - just remember!!)
+        // Standard BFS(Normal queue) with Level Order (since minimum 'price' asked - level by level)
+
+        if (src == dst)
+            return 0;
+        unordered_map<int, vector<pair<int, int>>> adj;
+        for (auto& flight : flights)
+            adj[flight[0]].push_back({flight[1], flight[2]});
+        
+        vector<int> price(n, INT_MAX); // Never use global updated price/cost in k stops questions, many race conditions
+        price[src] = 0;     // we'll only use this to stop infinite loop, and ensure that only smaller cost than globally found is added into the queue
+
+        queue<pair<int, int>> q;
+        q.push({src, 0});
+        int minPath = INT_MAX;
+        while (q.size())
+        {
+            int size = q.size();
+            while (size--)
+            {
+                auto node = q.front();
+                q.pop();
+                for (auto& next : adj[node.first])
+                {
+                    if (next.first == dst)
+                        minPath = min(minPath, node.second + next.second);
+                    else
+                    {
+//////////////////////////////////////////////////////Because : Will run into infinite loop, can't even use visited array, 
+//////////////////////////////////////////////////////as I do want to visit this again for a smaller weight
+
+                        q.push({next.first, node.second + next.second});
+
+/////////////////////////////////////////////////////////////////////////////
+                    }
+                }
+            }
+            --k;
+            if (k < 0)
+                break;
+        }
+        if (minPath == INT_MAX)
+            return -1;
+        return minPath;
+    }
+};
+#############################################
+
+
+############################################# Can't do this - 2 #############################################
+class Solution {
+public:
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+        // Cheapest price : BFS
+        // Positive weights with k stops : Not Dijkstra (Min Heap), since k stops mentioned (Global Distance gets wronly updated due to min heap - just remember!!)
+        // Standard BFS(Normal queue) with Level Order (since minimum 'price' asked - level by level)
+
+        if (src == dst)
+            return 0;
+        unordered_map<int, vector<pair<int, int>>> adj;
+        for (auto& flight : flights)
+            adj[flight[0]].push_back({flight[1], flight[2]});
+        
+        vector<int> price(n, INT_MAX); // Never use global updated price/cost in k stops questions, many race conditions
+        price[src] = 0;     // we'll only use this to stop infinite loop, and ensure that only smaller cost than globally found is added into the queue
+
+        queue<pair<int, int>> q;
+        q.push({src, 0});
+        int minPath = INT_MAX;
+        while (q.size())
+        {
+            int size = q.size();
+            while (size--)
+            {
+                auto node = q.front();
+                q.pop();
+/////////////////////////////////// Can't do this : We are not maintaining any global list to visit later, and after k < 0, we won't be checking the value of dst in queue, 
+/////////////////////////////////// hence need to check and note value while visiting neighbours in last iteration
+                if (node.first == dst)
+                {
+                    minPath = min(minPath, node.second);
+                    continue;
+                }
+///////////////////////////////////
+                for (auto& next : adj[node.first])
+                {
+                    if (price[next.first] > node.second + next.second)
+                    {
+                        price[next.first] = node.second + next.second;
+                        q.push({next.first, node.second + next.second});
+                    }
+                }
+            }
+===================================== Because of this
+            --k;
+            if (k < 0)
+                break;
+===================================== 
+        }
+        if (minPath == INT_MAX)
+            return -1;
+        return minPath;
+    }
+};
+#############################################
+
+
+
+
+############################################# THIS WORKS#############################################
+class Solution {
+public:
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+        // Cheapest price : BFS
+        // Positive weights with k stops : Not Dijkstra (Min Heap), since k stops mentioned (Global Distance gets wronly updated due to min heap - just remember!!)
+        // Standard BFS(Normal queue) with Level Order (since minimum 'price' asked - level by level)
+
+        if (src == dst)
+            return 0;
+        unordered_map<int, vector<pair<int, int>>> adj;
+        for (auto& flight : flights)
+            adj[flight[0]].push_back({flight[1], flight[2]});
+        
+        vector<int> price(n, INT_MAX); // Never use global updated price/cost in k stops questions, many race conditions
+        price[src] = 0;     // we'll only use this to stop infinite loop, and ensure that only smaller cost than globally found is added into the queue
+
+        queue<pair<int, int>> q;
+        q.push({src, 0});
+        int minPath = INT_MAX;
+        while (q.size())
+        {
+            int size = q.size();
+            while (size--)
+            {
+                auto node = q.front();
+                q.pop();
+                if (node.first == dst)
+                {
+                    minPath = min(minPath, node.second);
+                    continue;
+                }
+                for (auto& next : adj[node.first])
+                {
+                    if (price[next.first] > node.second + next.second)
+                    {
+                        price[next.first] = node.second + next.second;
+                        q.push({next.first, price[next.first]});
+                    }
+                }
+            }
+            --k;
+            if (k < 0)
+                break;
+        }
+        if (minPath == INT_MAX)
+            return -1;
+        return minPath;
+    }
+};
+
+#############################################
