@@ -33,3 +33,24 @@
     1. Kosaraju's
     2. Tarjan's
 ---
+
+---
+# Summary
+---
+## Graph Algorithms Summary
+
+| Topic                  | Algorithm       | Directed      | Undirected     | Both        |
+|------------------------|----------------|---------------|----------------|-------------|
+| Shortest Path          | Dijkstra        | ✅             | ✅              | ✅           |
+| Shortest Path          | Bellman-Ford    | ✅             | ⚠️ (Adapted)    | ⚠️           |
+| Shortest Path          | Floyd-Warshall  | ✅             | ⚠️              | ⚠️           |
+| Minimum Spanning Tree  | Prim's          | ❌             | ✅              | ❌           |
+| Minimum Spanning Tree  | Kruskal's       | ❌             | ✅              | ❌           |
+| Strongly Connected Comp| Kosaraju's      | ✅             | ❌              | ❌           |
+| Strongly Connected Comp| Tarjan's        | ✅             | ❌              | ❌           |
+| Topological Sort       | Kahn's          | ✅ (DAG)       | ❌              | ❌           |
+| Disjoint Sets / Union  | Union-Find      | ⚠️             | ✅              | ✅           |
+
+- Summary :
+    - Except MST and Disjoint-set(Connected components), all other concepts are applicable for Directed Graphs  
+
