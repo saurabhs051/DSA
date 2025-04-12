@@ -1,3 +1,9 @@
+/* Singleton Design Pattern
+ * 1. Goals :
+ *    1.1 Have only a single object created throughout the program lifecycle
+ *    1.2 Handle concurrency (for multi-threaded environment)
+ *    1.3 Other aspects : Lazy loading (only create object if required), Post C++11 vs Pre C++11
+ */
 #include <iostream>
 #include <mutex>
 
