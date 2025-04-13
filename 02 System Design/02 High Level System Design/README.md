@@ -83,6 +83,59 @@
     - **Scalability Patterns**: Horizontal, Vertical, Stateless Services  
     - **Design Patterns**: Circuit Breaker, Bulkhead, Retry, Singleton, Strategy 
     - **Encodings**: Base62, MD5 Hashing, SHA Hashing
+    - ## 🛠 How to Handle Stale Data in Cache (Common Techniques)
+
+        ### Cache Invalidation
+        * Remove the cache entry when an update happens (`DEL` in Redis).
+        * Next request will fetch from DB and repopulate cache.
+        
+        ### Write-through Cache
+        * Updates go to both DB and cache simultaneously.
+        * Keeps cache always fresh but adds latency.
+        
+        ### Time-to-Live (TTL)
+        * Set expiry on cache keys (e.g., `timeline:<user_id>` $\rightarrow$ TTL 5 mins).
+        * Forces periodic refresh from DB.
+        
+        ### Event-driven Invalidation
+        * Use Kafka events (e.g., `new_tweet`) to notify Timeline Service to update or evict specific cache keys.
+
+        ### Versioning
+        * Store version/timestamp with cache.
+        * Clients or services compare versions and decide to refresh.
+
+    - ## 🗑️ Cache Eviction Techniques (Managing Limited Cache Space)
+
+        When a cache reaches its capacity, eviction policies determine which entries to remove to make space for new ones. Here are some common techniques:
+        
+        ### Least Recently Used (LRU)
+        * Evicts the entry that has been least recently accessed.
+        
+        ### Least Frequently Used (LFU)
+        * Evicts the entry that has been accessed the fewest number of times.
+        
+        ### First-In, First-Out (FIFO)
+        * Evicts the entry that was inserted into the cache first, regardless of how often it has been accessed.
+        
+        ### Most Recently Used (MRU)
+        * Evicts the entry that was accessed most recently.
+        * Can be useful in specific scenarios where recently accessed items are unlikely to be accessed again soon (e.g., sequential file processing).
+        
+        ### Random Replacement
+        * Evicts a random entry from the cache.
+        
+        ### Size-based Eviction
+        * Evicts entries based on their size to free up a certain amount of memory.
+        * Often used in conjunction with other policies (e.g., evict the largest LRU item).
+        
+        ### Time-Aware Eviction
+        * Considers the age of the cached entry.
+        * May evict older entries even if they are frequently accessed.
+        * Can be combined with TTL for a more nuanced eviction strategy.
+        
+        ### Policy Combinations
+        * Real-world caching systems often employ combinations of these policies to optimize performance based on specific workload characteristics. For example, an LRU-K policy keeps track of the last K accesses for each item, providing a more robust approach than simple LRU.
+
 13. Product Deployment Strategy
     - Application layer : Isolated stacks, Common stack, Hybrid stack
 14. Tools at our disposal
