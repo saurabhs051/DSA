@@ -173,4 +173,7 @@
 <img width="762" alt="image" src="https://github.com/user-attachments/assets/e430f86a-4d0b-4b7c-9559-53cc9fff12b1" />
 
 ---
+## System Design Tools - Cheatsheet
+<img width="876" alt="image" src="https://github.com/user-attachments/assets/46a319b6-58c8-4ce9-a2da-019c13892ebf" />
 
+---
