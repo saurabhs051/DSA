@@ -82,7 +82,7 @@
     - **Rate Limiting**: Sliding window, token bucket algorithms  
     - **Scalability Patterns**: Horizontal, Vertical, Stateless Services  
     - **Design Patterns**: Circuit Breaker, Bulkhead, Retry, Singleton, Strategy 
-    - 
+    - **Encodings**: Base62, MD5 Hashing, SHA Hashing
 13. Product Deployment Strategy
     - Application layer : Isolated stacks, Common stack, Hybrid stack
 14. Tools at our disposal
@@ -162,6 +162,10 @@
 
 ## 16. Payment
 - Third party payment gateways
+  
+## 17. Unique ID Generation (Unique globally)
+- Twitter's Snowflake
+- UUID
 
 ---
 # 2. 🧱 System Design Architecture Examples (Interview-Focused)
