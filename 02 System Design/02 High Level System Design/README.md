@@ -76,7 +76,13 @@
 11. Mechanisms / Algorithms
     - Seat/Resource Blocking : e.g. Blocking Seat (Ticket Booking System)
         - timeout-based block mechanism
-            - Redis based blocking technique with a defined TTL 
+            - Redis based blocking technique with a defined TTL
+    - **Consistency Models**: Strong, Eventual, Causal  
+    - **CAP Theorem**: Consistency, Availability, Partition Tolerance trade-offs  
+    - **Rate Limiting**: Sliding window, token bucket algorithms  
+    - **Scalability Patterns**: Horizontal, Vertical, Stateless Services  
+    - **Design Patterns**: Circuit Breaker, Bulkhead, Retry, Singleton, Strategy 
+    - 
 13. Product Deployment Strategy
     - Application layer : Isolated stacks, Common stack, Hybrid stack
 14. Tools at our disposal
