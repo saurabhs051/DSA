@@ -1,8 +1,8 @@
-/ * Single source shortest path - Shortest path from one node to all other nodes
-  * Negative weights allowed. Hence, Bellman Ford
-  * Algorithm : Iterate V-1 times. Each time optimize distance for all the edges
-  * Time complexity : O(V*E) : V-1 times we processed all edges
-  */
+/* Single source shortest path - Shortest path from one node to all other nodes
+ * Negative weights allowed. Hence, Bellman Ford
+ * Algorithm : Iterate V-1 times. Each time optimize distance for all the edges
+ * Time complexity : O(V*E) : V-1 times we processed all edges
+ */
 class Solution {
   public:
     vector<int> bellmanFord(int V, vector<vector<int>>& edges, int src) {
