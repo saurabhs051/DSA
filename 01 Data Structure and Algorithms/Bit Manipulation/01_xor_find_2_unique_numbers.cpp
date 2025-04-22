@@ -10,7 +10,7 @@ public:
   	 * Practical Concept 2 : num ^ num = 0 (i.e. if same number occurring even times, it will cancel out) - VERY IMPORTANT
 	 * Practical Concept 3 : To check whether a bit is set, check : if (num & (1 << position))
      * Practical Concept 4 : To set a bit at a position, do : num |= (1 << position)
-	 * Practical Concept 5 : To unset a bit at a position, do : num &= (1 << position)
+	 * Practical Concept 5 : To unset a bit at a position, do : num = num & ~(1 << position)
      * Practical Concept 6 : Always use parenthesis while using bitwise operators &, |, ^ in conditions, because they have less precedence than == , e.g. if (0 == (b & c))
 	 * Practical Concept 7 : Remember, (num & (1 << position)) is not equal to 1, it's equal to a number like 00100 (i.e. 4 in this case), so checking if(num & (1 << position))  is right, but if((num & (1 << position)) == 1) is wrong.
      * Practical Concept 8 : (n & n-1) unsets last set bit of n. 
