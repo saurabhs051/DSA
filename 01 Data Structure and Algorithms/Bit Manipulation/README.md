@@ -22,6 +22,7 @@ result ^= num; // same as result = num;
 int result = 0;
 for (int num : arr) result ^= num;
 // result now holds the unique number
+// Reference : https://www.youtube.com/watch?v=peu1zFvWyto
 ```
 
 ---
