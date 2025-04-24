@@ -17,12 +17,11 @@ result ^= num; // same as result = num;
 
 ### ✅ `num ^ num = 0`
 - **Use Case**: Pairs cancel out. If a number appears an **even number of times**, XOR will cancel it.
-- **Common Pattern**: Finding the element that appears only once.
+- **Common Pattern**: Finding the element that appears only once. (reference for variations : // Reference : https://www.youtube.com/watch?v=peu1zFvWyto)
 ```cpp
 int result = 0;
 for (int num : arr) result ^= num;
 // result now holds the unique number
-// Reference : https://www.youtube.com/watch?v=peu1zFvWyto
 ```
 
 ---
